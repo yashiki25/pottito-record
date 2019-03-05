@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="ぽちっと簡単登録！n日坊主になるための家計簿">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ぽちっと家計簿</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+
+  <body>
+    <header>
+      <h1>ぽちっとかけいぼ</h1>
+      <p>気軽にぽちっと家計簿つけよう</p>
+      <time></time>
+    </header>
+    <section class="total">
+      <div>
+        今月の合計
+        <span id="total-price">0</span>
+      </div>
+    </section>
+    
+    <section class="graph">
+      <div id="open">
+        <i class="fas fa-chart-pie"></i> レポートを見る
+      </div>
+    
+      <div id="mask" class="hidden"></div>
+    
+      <div id="modal" class="hidden">
+        <h3>内訳</h3>
+        <table></table>
+        <h3>支出グラフ</h3>
+        <div id="target"></div>
+        <div id="close">
+          <i class="fas fa-window-close"> 閉じる</i>
+        </div>
+      </div>
+    </section>
+    
+    <section class="item-list">
+      <h2><i class="fas fa-pen-nib"></i> 購入品をぽちっと登録</h2>
+      <button id="edit"><i class="fas fa-edit"></i> 編集</button>
+      <ul>
+      </ul>
+      <button id="record">登録する</button>
+    </section>
+    
+    <section class="buying-history">
+      <h2><i class="fas fa-shopping-cart"></i> 購入履歴</h2>
+      <p>購入品の登録がありません。</p>
+      <table class="hidden">
+        <tbody>
+          <tr>
+            <th class="buying-date">購入日</th>
+            <th class="buying-name">品名</th>
+            <th class="buying-num">数</th>
+            <th class="buying-price">金額</th>
+            <th class="buying-delete"></th>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <footer>
+      &copy; ぽちっとかけいぼ
+    </footer>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+
+</html>
