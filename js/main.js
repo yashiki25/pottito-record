@@ -1,5 +1,3 @@
-'use strict';
-
 const items = [{
   name: 'ウェットフード',
   price: 100
@@ -52,6 +50,32 @@ const noDataText = document.querySelector('.buying-history p');
 
 // 日付を表示
 document.querySelector('time').textContent = getFormattedCurrentDate().toTop;
+
+const storage = localStorage;
+// 保存しているデータを読み込み
+readRecordData();
+
+function readRecordData() {
+  if (typeof (storage) === "undefined") {
+    alert('このブラウザではデータの登録ができません..');
+    return;
+  }
+
+  if (storage.getItem('record') === null) {
+    return;
+  }
+
+  recordItems = JSON.parse(storage.getItem('record'));
+
+  noDataText.classList.add('hidden');
+  buyingHistoryTable.classList.remove('hidden');
+
+  // 履歴と合計金額を作成
+  recordItems.forEach(item => {
+    createBuyingHistory(item.name, item.price, item.num);
+    updateTotalPrice(item.price, item.num);
+  });
+}
 
 // 購入品リストを生成
 createItems();
@@ -157,6 +181,13 @@ recordBtn.addEventListener('click', () => {
       itemsListChildren[i].children[2].textContent = "0";
     }
   }
+
+  // WebStorageのデータを更新
+  if (typeof (storage) === "undefined") {
+    return;
+  }
+
+  storage.setItem('record', JSON.stringify(recordItems));
 });
 
 // 購入履歴の作成
@@ -214,6 +245,13 @@ function createBuyingHistory(name, price, num) {
       noDataText.classList.remove('hidden');
       buyingHistoryTable.classList.add('hidden');
     }
+
+    // WebStorageのデータを更新
+    if (typeof (storage) === "undefined") {
+      return;
+    }
+
+    storage.setItem('record', JSON.stringify(recordItems));
   });
 }
 
