@@ -1,0 +1,286 @@
+body {
+  background: #fff4e3;
+  color: #5d5d5a;
+  font-family: 'Ubuntu', 'M PLUS Rounded 1c', Sans-Serif;
+}
+
+h1 {
+  margin-bottom: -8px;
+  text-align: center;
+  text-shadow: #fff 4px 1px 1px, #fff -2px 1px 1px, #fff 4px -1px 1px, #fff -2px -1px 1px;
+  color: #ffa45c;
+}
+
+header p {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 5px dashed #fff;
+  text-align: center;
+  color: #757570;
+  font-size: 14px;
+}
+
+time {
+  display: block;
+  width: 180px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#modal h3::before {
+  content: "● ";
+}
+
+h2 {
+  margin-left: 20px;
+}
+
+.total div {
+  width: 90%;
+  height: 50px;
+  padding-left: 10px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  background: #fff;
+  line-height: 3;
+}
+
+#total-price {
+  float: right;
+  padding-right: 20px;
+  margin: 0 auto;
+}
+
+.item-list h2 {
+  display: inline;
+}
+
+#edit {
+  height: 30px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 3px;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.item-list {
+  margin-top: 80px;
+}
+
+.item-list ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style-type: none;
+  padding-left: 0;
+  text-align: center;
+}
+
+.item-name {
+  display: flex;
+  width: 150px;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 10px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.item-num-btn {
+  border-radius: 30px;
+  outline: none;
+  cursor: pointer;
+}
+
+.item-num-btn:hover {
+  opacity: .7;
+}
+
+.item-num {
+  display: inline-block;
+  width: 30px;
+  margin: 0 10px;
+  border-radius: 5px;
+  background: #fff;
+}
+
+#record {
+  display: block;
+  width: 50%;
+  height: 50px;
+  margin: 0 auto;
+  margin-top: 50px;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  background: #ffa45c;
+  letter-spacing: 5px;
+  font-size: 1.2rem;
+  color: #fff4e3;
+  cursor: pointer;
+}
+
+#record:hover {
+  opacity: .7;
+}
+
+.buying-history {
+  margin-top: 45px;
+}
+
+.buying-history table {
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid #ffc993;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.buying-history th {
+  background: #ffa45c;
+  font-weight: normal;
+}
+
+.buying-history td {
+  border-top: 1px solid #ffc489;
+  background: #fff;
+}
+
+.buying-history th:not(:last-child) {
+  border-right: 1px solid #fff;
+  color: #fff4e3;
+}
+
+.buying-history td:not(:last-child) {
+  border-right: 1px solid #ffc489;
+}
+
+.buying-date {
+  width: 15%;
+}
+
+.buying-name {
+  width: 40%;
+}
+
+.buying-num {
+  width: 10%;
+}
+
+.buying-price {
+  width: 25%;
+}
+
+#total-price::before,
+.buying-price-td::before {
+  content: "¥ ";
+}
+
+.delete {
+  border-radius: 30px;
+  outline: none;
+  cursor: pointer;
+}
+
+.delete:hover {
+  opacity: .7;
+}
+
+.buying-history p {
+  text-align: center;
+  color: #757570;
+}
+
+.selected-list {
+  border: 3px solid #ffc489;
+}
+
+#open {
+  float: right;
+  width: 150px;
+  margin-right: 70px;
+  border-radius: 3px;
+  background: #fff;
+  font-size: 14px;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+#open:hover {
+  opacity: .7;
+}
+
+#mask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+#modal {
+  width: 500px;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  left: 0;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 4px;
+  background: #fff;
+  transition: .8s;
+}
+
+#modal tr td:first-child {
+  width: 55%;
+}
+
+#close {
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#close:hover {
+  opacity: .7;
+}
+
+#modal table {
+  width: 100%;
+}
+
+#mask.hidden,
+table.hidden,
+p.hidden {
+  display: none;
+}
+
+#modal.hidden {
+  transform: translate(0, -500px);
+}
+
+footer {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 14px;
+}
+
+@media (max-width: 912px) {
+  #modal {
+    width: 300px;
+  }
+  #open {
+    margin-right: 20px;
+  }
+}
