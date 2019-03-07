@@ -47,10 +47,42 @@
     
     <section class="item-list">
       <h2><i class="fas fa-pen-nib"></i> 購入品をぽちっと登録</h2>
-      <button id="edit"><i class="fas fa-edit"></i> 編集</button>
+      <button id="edit">編集</button>
       <ul>
       </ul>
       <button id="record">登録する</button>
+    
+      <section class="edit-list">
+        <div id="mask-edit" class="hidden"></div>
+    
+        <div id="modal-edit" class="hidden">
+          <h3>購入品リストを編集</h3>
+          <ul class="edit-menu">
+            <li id="menu-add">追加</li>
+            <li id="menu-edit">編集</li>
+          </ul>
+    
+          <section class="create-item hidden">
+            <ul>
+              <li><label>品名 <input type="text" id="new-name"></label></li>
+              <li><label>価格 <input type="number" id="new-price"></label> 円</li>
+            </ul>
+            <button id="add-go">追加する</button>
+          </section>
+    
+          <section class="edit-items hidden">
+            <p>既存の品名・価格を変更した場合、購入履歴にも変更が反映されます。</p>
+            <p>項目を削除した場合、購入履歴の削除は行われません。</p>
+            <ul>
+            </ul>
+            <button id="edit-go">編集する</button>
+          </section>
+          <div id="cansel">
+            <i class="fas fa-window-close"> キャンセル</i>
+          </div>
+        </div>
+      </section>
+    
     </section>
     
     <section class="buying-history">

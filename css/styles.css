@@ -58,13 +58,19 @@ h2 {
 }
 
 #edit {
-  height: 30px;
+  height: 25px;
   margin-left: 10px;
   border: none;
   border-radius: 3px;
   background: #fff;
-  font-size: 14px;
+  color: #5d5d5a;
+  font-size: 13px;
+  outline: none;
   cursor: pointer;
+}
+
+#edit:hover {
+  opacity: .7;
 }
 
 .item-list {
@@ -227,6 +233,7 @@ h2 {
   right: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
 }
 
 #modal {
@@ -240,20 +247,27 @@ h2 {
   border-radius: 4px;
   background: #fff;
   transition: .8s;
+  z-index: 2;
 }
 
 #modal tr td:first-child {
   width: 55%;
 }
 
-#close {
+#close,
+#cansel {
   text-align: center;
   font-size: 12px;
   cursor: pointer;
 }
 
-#close:hover {
+#close:hover,
+#cansel:hover {
   opacity: .7;
+}
+
+#cansel {
+  margin-top: 30px;
 }
 
 #modal table {
@@ -262,12 +276,174 @@ h2 {
 
 #mask.hidden,
 table.hidden,
-p.hidden {
+p.hidden,
+#mask-edit.hidden,
+.create-item.hidden,
+.edit-items.hidden,
+span.hidden {
   display: none;
 }
 
 #modal.hidden {
   transform: translate(0, -500px);
+}
+
+#modal-edit {
+  width: 80%;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  left: 0;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 4px;
+  background: #fff;
+  transition: .8s;
+  z-index: 2;
+}
+
+#modal-edit.hidden {
+  transform: translate(0, -500px);
+}
+
+#mask-edit {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.edit-menu {
+  margin-bottom: 40px;
+}
+
+.edit-menu li {
+  display: inline-block;
+  padding: 5px 13px;
+  text-decoration: none;
+  background: #ECECEC;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+}
+
+.edit-menu li:hover {
+  background: #ffa45c;
+  color: #fff;
+  opacity: .7;
+}
+
+.current-edit {
+  background: #ffa45c !important;
+  color: #fff;
+}
+
+#menu-add {
+  border-right: 2px solid #fff;
+  border-radius: 12px 0 0 12px;
+}
+
+#menu-edit {
+  border-radius: 0 12px 12px 0;
+}
+
+#modal-edit h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.create-item ul {
+  display: flex;
+  height: 50px;
+  align-items: center;
+}
+
+.create-item li {
+  font-size: 12px;
+}
+
+.create-item input {
+  border: 1px solid #dcdddd;
+  border-radius: 3px;
+}
+
+.create-item label {
+  font-size: 13px;
+}
+
+#new-name {
+  width: 100px;
+  margin-right: 15px;
+}
+
+#new-price {
+  width: 50px;
+}
+
+#add-go,
+#edit-go {
+  display: block;
+  margin: 0 auto;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 15px;
+  background: #ffa45c;
+  color: #fff4e3;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}
+
+#add-go:hover,
+#edit-go:hover {
+  opacity: .7;
+}
+
+.edit-items p {
+  font-size: 14px;
+  text-align: center;
+}
+
+.edit-items p:first-child {
+  margin-bottom: -10px;
+}
+
+.edit-items ul {
+  display: block;
+}
+
+.edit-items li {
+  position: relative;
+  padding: 5px 0;
+}
+
+.edit-list span {
+  font-size: 12px;
+}
+
+.edit-items input {
+  border: 1px solid #dcdddd;
+  border-radius: 3px;
+}
+
+input.edit-item-price {
+  width: 50px;
+}
+
+span.edit-item-price {
+  width: 50px;
+  margin-left: 15px;
+}
+
+span.delete-check {
+  margin-left: 10px;
+}
+
+.edit-check {
+  color: #0084ff;
 }
 
 footer {
