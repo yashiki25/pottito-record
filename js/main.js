@@ -71,7 +71,7 @@ const storage = localStorage;
 readData();
 
 function readData() {
-  if (typeof (storage) === "undefined") {
+  if (typeof (storage) === 'undefined') {
     alert('このブラウザではデータの登録ができません..');
     return;
   }
@@ -198,7 +198,7 @@ recordBtn.addEventListener('click', () => {
       recordNo++;
 
       // WebStorageのデータを更新
-      if (typeof (storage) === "undefined") {
+      if (typeof (storage) === 'undefined') {
         return;
       }
 
@@ -214,7 +214,7 @@ recordBtn.addEventListener('click', () => {
   }
 
   // WebStorageのデータを更新
-  if (typeof (storage) === "undefined") {
+  if (typeof (storage) === 'undefined') {
     return;
   }
 
@@ -281,7 +281,7 @@ function createBuyingHistory(name, price, num, no) {
     }
 
     // WebStorageのデータを更新
-    if (typeof (storage) === "undefined") {
+    if (typeof (storage) === 'undefined') {
       return;
     }
 
@@ -445,7 +445,7 @@ createBtn.addEventListener('click', () => {
   });
 
   // WebStorageのデータを更新
-  if (typeof (storage) !== "undefined") {
+  if (typeof (storage) !== 'undefined') {
     storage.setItem('items', JSON.stringify(items));
   }
 
@@ -496,7 +496,7 @@ editBtn.addEventListener('click', () => {
   items = newItems;
 
   // WebStorageのデータを更新
-  if (typeof (storage) !== "undefined") {
+  if (typeof (storage) !== 'undefined') {
     storage.setItem('items', JSON.stringify(items));
     storage.setItem('record', JSON.stringify(recordItems));
   }
