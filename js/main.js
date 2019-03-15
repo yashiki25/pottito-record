@@ -1,34 +1,36 @@
 'use strict';
 
-let items = [{
-  name: 'ウェットフード',
-  price: 100
-},
-{
-  name: 'ドライフード',
-  price: 850
-},
-{
-  name: 'おやつ',
-  price: 200
-},
-{
-  name: 'おもちゃ',
-  price: 300
-},
-{
-  name: '猫砂',
-  price: 500
-},
-{
-  name: 'つめとぎ',
-  price: 400
-},
-{
-  name: '診察代',
-  price: 2500
-},
-]
+// let items = [{
+//   name: 'ウェットフード',
+//   price: 100
+// },
+// {
+//   name: 'ドライフード',
+//   price: 850
+// },
+// {
+//   name: 'おやつ',
+//   price: 200
+// },
+// {
+//   name: 'おもちゃ',
+//   price: 300
+// },
+// {
+//   name: '猫砂',
+//   price: 500
+// },
+// {
+//   name: 'つめとぎ',
+//   price: 400
+// },
+// {
+//   name: '診察代',
+//   price: 2500
+// },
+// ]
+
+let items = [];
 
 // 円グラフデータ
 const chartItems = [
@@ -101,8 +103,23 @@ function readData() {
   }
 }
 
-// 購入品リストを生成
-createItems();
+// 購入品リストの生成判定
+isCreateItems();
+
+function isCreateItems() {
+  const massage = document.getElementById('item-list-info');
+  if (items.length < 1) {
+    massage.classList.remove('hidden');
+    recordBtn.classList.add('hidden');
+  }
+  else {
+    massage.classList.add('hidden');
+    recordBtn.classList.remove('hidden');
+    
+    // 購入品リストを生成
+    createItems();
+  }
+}
 
 function createItems() {
   items.forEach(item => {

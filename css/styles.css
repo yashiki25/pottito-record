@@ -73,6 +73,12 @@ h2 {
   opacity: .7;
 }
 
+#item-list-info {
+  margin-top: 50px;
+  text-align: center;
+  color: #757570;
+}
+
 .item-list {
   margin-top: 80px;
 }
@@ -280,7 +286,9 @@ p.hidden,
 #mask-edit.hidden,
 .create-item.hidden,
 .edit-items.hidden,
-span.hidden {
+span.hidden,
+#item-list-info.hidden,
+#record.hidden {
   display: none;
 }
 
@@ -416,7 +424,6 @@ span.hidden {
 }
 
 .edit-items li {
-  position: relative;
   padding: 5px 0;
 }
 
