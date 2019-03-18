@@ -1,3 +1,45 @@
+<?php
+require_once(__DIR__ . '/config.php');
+require_once(__DIR__ . '/functions.php');
+require_once(__DIR__ . '/Item.php');
+require_once(__DIR__ . '/purchaseItem.php');
+
+// 購入品リストを取得
+try{
+  $itemList = new \Item();
+  $items = $itemList->getAll();
+
+  $purchaseHistory = new \PurchaseHistory();
+  $purchaseItems = $purchaseHistory->getAll();
+} catch (Exception $e) {
+  echo $e->getMessage();
+}
+
+// 購入品リストの追加
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-name'])) {
+  $itemList->post();
+  $err = $itemList->getError();
+}
+
+// 購入履歴の登録
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item'])) {
+  $purchaseHistory->post($_POST['item']);
+  $err = $purchaseHistory->getError();
+}
+
+// 購入履歴の削除
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
+  $purchaseHistory->delete($_POST['delete']);
+  $err = $purchaseHistory->getError();
+}
+
+// 購入品リストの編集
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
+  $itemList->update();
+  $err = $itemList->getError();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -48,10 +90,16 @@
     <section class="item-list">
       <h2><i class="fas fa-pen-nib"></i> 購入品をぽちっと登録</h2>
       <button id="edit">編集</button>
+
+      <!-- 購入リストが登録されている場合に表示 -->
       <p id="item-list-info">「編集」から購入品リストを作成してください。</p>
-      <ul>
-      </ul>
-      <button id="record">登録する</button>
+
+      <form id="item-list-from" action="" method="POST">
+        <ul>
+        </ul>
+      </form>
+
+      <button id="record" type="button">登録する</button>
     
       <section class="edit-list">
         <div id="mask-edit" class="hidden"></div>
@@ -64,19 +112,21 @@
           </ul>
     
           <section class="create-item hidden">
-            <ul>
-              <li><label>品名 <input type="text" id="new-name"></label></li>
-              <li><label>価格 <input type="number" id="new-price"></label> 円</li>
-            </ul>
+            <form action="" method="post" id="add-form">
+              <label>品名 <input type="text" id="new-name" name="add-name"></label>
+              <label>価格 <input type="number" id="new-price" name="add-price"> 円</label>
+              <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+            </form>
             <button id="add-go">追加する</button>
           </section>
     
           <section class="edit-items hidden">
-            <p>既存の品名・価格を変更した場合、購入履歴にも変更が反映されます。</p>
-            <p>項目を削除した場合、購入履歴の削除は行われません。</p>
+            <p>※ 購入履歴への反映は行われません。</p>
+            <form id="edit-from" action="" method="POST">
+            </form>
             <ul>
             </ul>
-            <button id="edit-go">編集する</button>
+            <button id="edit-go" type="button">編集する</button>
           </section>
           <div id="cansel">
             <i class="fas fa-window-close"> キャンセル</i>
@@ -100,7 +150,21 @@
           </tr>
         </tbody>
       </table>
+      <form action="" method="post" id="history-delete-form">
+        <input type="hidden" name="delete">
+      </form>
     </section>
+
+    <!-- 購入品リストをjsonに変換してjsで扱う -->
+    <script>
+      const phpItems = <?php echo(json_encode($items)); ?>;
+      const phpPurchaseHistory = <?php echo(json_encode($purchaseItems)); ?>;
+    </script>
+
+    <?php if(isset($err)) : ?>
+    <script>alert('ERROR!');</script>
+    <?php endif; ?>
+
     <footer>
       &copy; ぽちっとかけいぼ
     </footer>

@@ -363,14 +363,9 @@ span.hidden,
   margin-bottom: 20px;
 }
 
-.create-item ul {
-  display: flex;
+.create-item form {
   height: 50px;
-  align-items: center;
-}
-
-.create-item li {
-  font-size: 12px;
+  text-align: center;
 }
 
 .create-item input {
@@ -413,10 +408,6 @@ span.hidden,
 .edit-items p {
   font-size: 14px;
   text-align: center;
-}
-
-.edit-items p:first-child {
-  margin-bottom: -10px;
 }
 
 .edit-items ul {
