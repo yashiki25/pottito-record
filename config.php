@@ -2,9 +2,9 @@
 
 ini_set('diaplay_erros', 1);
 
-define('DSN', 'mysql:dbhost=localhost;dbname=pottito_db');
+define('DSN', 'sqlite:pottito_db');
 define('DB_DATABASE', 'pottito_db');
-define('DB_USERNAME', 'dbuser');
-define('DB_PASSWORD', 'yashikisan');
+define('DB_USERNAME', '');
+define('DB_PASSWORD', '');
 
 session_start();
