@@ -2,4 +2,4 @@
 
 ## デモページ
 
-https://yashiki25.github.io/pottito-record/
+準備中...
