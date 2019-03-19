@@ -8,27 +8,13 @@ class Item {
     $this->_createToken();
   }
 
-  private function _connectDB() {
-    try {
-      $this->_db = new \PDO(DSN, DB_USERNAME, DB_PASSWORD);
-      $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-    } catch (\PDOException $e) {
-      echo $e->getMessage();
-      exit;
-    }
-  }
-
-  private function _createToken() {
-    if (!isset($_SESSION['token'])) {
-      $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(16));
-    }
-  }
-
+  // 購入品リストの取得
   public function getAll() {
     $stmt = $this->_db->query('select * from items order by id asc');
-    return $stmt->fetchAll(\PDO::FETCH_OBJ);  // オブジェクト形式で返す
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
+  // 購入品リストへの追加
   public function post() {
     try {
       $this->_validateToken();
@@ -49,6 +35,34 @@ class Item {
     }
 
     return $err;
+  }
+
+  // 購入品リストの編集・削除
+  public function update() {
+    try {
+      $this->_validateEditItem();
+      $this->_validateToken();
+      $this->_update();
+      header('Location: http://' . $_SERVER['HTTP_HOST'] . '/index.php');
+    } catch (\Exception $e) {
+      $_SESSION['err'] = $e->getMessage();
+    }
+  }
+
+  private function _connectDB() {
+    try {
+      $this->_db = new \PDO(DSN, DB_USERNAME, DB_PASSWORD);
+      $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+    } catch (\PDOException $e) {
+      echo $e->getMessage();
+      exit;
+    }
+  }
+
+  private function _createToken() {
+    if (!isset($_SESSION['token'])) {
+      $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(16));
+    }
   }
 
   private function _validateToken() {
@@ -79,12 +93,9 @@ class Item {
     $stmt->execute();
   }
 
-  public function update() {
-    try {
-      $this->_update();
-      header('Location: http://' . $_SERVER['HTTP_HOST'] . '/index.php');
-    } catch (\Exception $e) {
-      $_SESSION['err'] = $e->getMessage();
+  private function _validateEditItem() {
+    if(!isset($_POST['edit'])) {
+      throw new \Exception('invalid input!');
     }
   }
 

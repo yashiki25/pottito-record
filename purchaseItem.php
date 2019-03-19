@@ -6,6 +6,7 @@ class PurchaseHistory {
 
   public function __construct() {
     $this->_connectDB();
+    $this->_createToken();
   }
 
   private function _connectDB() {
@@ -18,14 +19,17 @@ class PurchaseHistory {
     }
   }
 
+  // 購入履歴を取得
   public function getAll() {
     $stmt = $this->_db->query("select * from purchaseHistory order by id asc");
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
+  // 購入履歴への追加
   public function post($purchaseItem) {
     try {
       $this->_validateItem($purchaseItem);
+      $this->_validateToken();
       $this->_extractionItem();
       $this->_save();
       header('Location: http://' . $_SERVER['HTTP_HOST'] . '/index.php');
@@ -45,14 +49,42 @@ class PurchaseHistory {
     return $err;
   }
 
+  // 購入履歴の削除
+  public function delete($deleteItem) {
+    try{
+      $this->_validateItem($deleteItem);
+      $this->_validateToken();
+      $this->_delete();
+      header('Location: http://' . $_SERVER['HTTP_HOST'] . '/index.php');
+    } catch(\Exception $e) {
+      $_SESSION['err'] = $e->getMessage();
+    }
+  }
+
+  private function _createToken() {
+    if (!isset($_SESSION['token'])) {
+      $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(16));
+    }
+  }
+
+  private function _validateToken() {
+    if (
+      !isset($_SESSION['token']) ||
+      !isset($_POST['token']) ||
+      $_SESSION['token'] !== $_POST['token']
+    ) {
+      throw new \Exception('invalid token!');
+    }
+  }
+
   private function _validateItem($item) {
     if(!isset($item)) {
       throw new \Exception('invalid input!');
     }
   }
 
+  // 個数が設定されている購入品だけを抽出
   private function _extractionItem() {
-    // 個数が登録されているアイテムだけを抽出
     foreach($_POST['item'] as $item) {
       if($item['purchaseNum'] != "0") {
         array_push($this->_purchaseItems, $item);
@@ -68,16 +100,6 @@ class PurchaseHistory {
       $stmt->bindValue(':price', (int)$item['purchasePrice'], \PDO::PARAM_INT);
       $stmt->bindValue(':num', (int)$item['purchaseNum'], \PDO::PARAM_INT);
       $stmt->execute();
-    }
-  }
-
-  public function delete($deleteItem) {
-    try{
-      $this->_validateItem($deleteItem);
-      $this->_delete();
-      header('Location: http://' . $_SERVER['HTTP_HOST'] . '/index.php');
-    } catch(\Exception $e) {
-      $_SESSION['err'] = $e->getMessage();
     }
   }
 

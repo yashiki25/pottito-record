@@ -97,6 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
       <form id="item-list-from" action="" method="POST">
         <ul>
         </ul>
+        <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
       </form>
 
       <button id="record" type="button">登録する</button>
@@ -123,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
           <section class="edit-items hidden">
             <p>※ 購入履歴への反映は行われません。</p>
             <form id="edit-from" action="" method="POST">
+              <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
             </form>
             <ul>
             </ul>
@@ -152,10 +154,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
       </table>
       <form action="" method="post" id="history-delete-form">
         <input type="hidden" name="delete">
+        <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
       </form>
     </section>
 
-    <!-- 購入品リストをjsonに変換してjsで扱う -->
+    <!-- 購入品リストをjsonに変換してmain.jsで扱う -->
     <script>
       const phpItems = <?php echo(json_encode($items)); ?>;
       const phpPurchaseHistory = <?php echo(json_encode($purchaseItems)); ?>;
