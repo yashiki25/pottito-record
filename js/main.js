@@ -39,8 +39,7 @@ const noDataText = document.querySelector('.buying-history p');
 // 日付を表示
 document.querySelector('time').textContent = getFormattedCurrentDate().toTop;
 
-const storage = localStorage;
-// 保存しているデータを読み込み
+// DBからのデータ読み込み
 readData();
 
 function readData() {
@@ -87,8 +86,6 @@ function createItems() {
     const spanName = document.createElement('span');
     spanName.classList.add('item-name');
     spanName.textContent = item.name; // 購入品名を設定
-    // spanName.dataset.price = item.price; // data属性に価格を設定
-    // spanName.dataset.id = item.id;
 
     const plusBtn = document.createElement('button');
     plusBtn.classList.add('item-num-btn');
@@ -110,26 +107,6 @@ function createItems() {
     li.appendChild(plusBtn);
     itemList.appendChild(li);
 
-    // サーバー送信用
-    const inputItemName = document.createElement('input');
-    inputItemName.type = 'hidden';
-    inputItemName.name = `item[${index}][purchaseName]`;
-    inputItemName.value = item.name;
-
-    const inputItemPrice = document.createElement('input');
-    inputItemPrice.type = 'hidden';
-    inputItemPrice.name = `item[${index}][purchasePrice]`;
-    inputItemPrice.value = item.price;
-
-    const inputItemNum = document.createElement('input');
-    inputItemNum.type = 'hidden';
-    inputItemNum.name = `item[${index}][purchaseNum]`;
-    inputItemNum.value = numSpan.textContent;
-
-    itemListForm.appendChild(inputItemName);
-    itemListForm.appendChild(inputItemPrice);
-    itemListForm.appendChild(inputItemNum);
-
     // +ボタンクリック
     plusBtn.addEventListener('click', () => {
       spanName.classList.add('selected-list');
@@ -150,6 +127,26 @@ function createItems() {
         }
       }
     });
+
+    // サーバー送信用
+    const inputItemName = document.createElement('input');
+    inputItemName.type = 'hidden';
+    inputItemName.name = `item[${index}][purchaseName]`;
+    inputItemName.value = item.name;
+
+    const inputItemPrice = document.createElement('input');
+    inputItemPrice.type = 'hidden';
+    inputItemPrice.name = `item[${index}][purchasePrice]`;
+    inputItemPrice.value = item.price;
+
+    const inputItemNum = document.createElement('input');
+    inputItemNum.type = 'hidden';
+    inputItemNum.name = `item[${index}][purchaseNum]`;
+    inputItemNum.value = numSpan.textContent;
+
+    itemListForm.appendChild(inputItemName);
+    itemListForm.appendChild(inputItemPrice);
+    itemListForm.appendChild(inputItemNum);
   });
 }
 
@@ -383,7 +380,7 @@ editBtn.addEventListener('click', () => {
   if (!confirm('購入品リストを編集しますか？')) {
     return;
   }
-  
+
   // サーバー送信用
   for (let i = 0; i < editingUl.children.length; i++) {
     const inputItemName = document.createElement('input');
@@ -413,42 +410,6 @@ editBtn.addEventListener('click', () => {
   }
 
   editListForm.submit();
-
-  // const newItems = [];
-  // for (let i = 0; i < editingUl.children.length; i++) {
-
-  //   // 削除項目はリストから外しので飛ばす
-  //   if (editingUl.children[i].children[4].checked) {
-  //     continue;
-  //   }
-
-  //   // 編集された品名と価格を取得
-  //   const editedName = editingUl.children[i].children[0].value;
-  //   const editedPrice = editingUl.children[i].children[2].value;
-
-  //   // 登録リストに編集を反映
-  //   recordItems.forEach(item => {
-  //     // 登録されているか確認
-  //     if (item.name !== items[i].name) {
-  //       return;
-  //     }
-
-  //     item.name = editedName;
-  //     item.price = editedPrice;
-  //   });
-
-  //   newItems.push({
-  //     name: editedName,
-  //     price: editedPrice
-  //   });
-  // }
-
-  // // 今の購入品リストに上書き
-  // items = newItems;
-
-  // alert('購入品リストの編集が完了しました!');
-  // // 画面をリロードして編集を反映
-  // window.location.reload();
 });
 
 // キャンセルボタンクリック 
