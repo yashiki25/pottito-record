@@ -21,7 +21,7 @@ class PurchaseHistory {
 
   // 購入履歴を取得
   public function getAll() {
-    $stmt = $this->_db->query("select * from purchasehistory order by id asc");
+    $stmt = $this->_db->query("select * from purchaseHistory order by id asc");
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
@@ -94,7 +94,7 @@ class PurchaseHistory {
 
   private function _save() {
     foreach($this->_purchaseItems as $item) {
-      $sql = "insert into purchasehistory (name, price, num) values (:name, :price, :num)";
+      $sql = "insert into purchaseHistory (name, price, num) values (:name, :price, :num)";
       $stmt = $this->_db->prepare($sql);
       $stmt->bindValue(':name', $item['purchaseName'], \PDO::PARAM_STR);
       $stmt->bindValue(':price', (int)$item['purchasePrice'], \PDO::PARAM_INT);
@@ -104,7 +104,7 @@ class PurchaseHistory {
   }
 
   private function _delete() {
-    $sql = "delete from purchasehistory where id = :id";
+    $sql = "delete from purchaseHistory where id = :id";
     $stmt = $this->_db->prepare($sql);
     $stmt->bindValue(':id', (int)$_POST['delete'], \PDO::PARAM_INT);
     $stmt->execute();
