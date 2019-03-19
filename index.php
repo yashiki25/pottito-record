@@ -165,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
     </script>
 
     <?php if(isset($err)) : ?>
-    <script>alert('ERROR!');</script>
+    <script>alert('ERROR!');console.log(<?= var_export($err, true)?>)</script>
     <?php endif; ?>
 
     <footer>
