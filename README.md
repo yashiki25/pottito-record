@@ -2,4 +2,5 @@
 
 ## デモページ
 
-準備中...
+Herokuにて公開中
+https://pottito-record.herokuapp.com/
